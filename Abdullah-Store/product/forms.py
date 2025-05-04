@@ -6,15 +6,20 @@ from django.core.exceptions import ValidationError
 class ProductReviewForm(forms.ModelForm):
     class Meta:
         model = ProductReview
+        fields = ['rate','review']
+
+class ProductReviewForm1(forms.ModelForm):
+    class Meta:
+        model = ProductReview
         fields = ['user','product','rate','review','date']
 
     def clean_rate(self):
-        rate = self.cleaned_data.get('rate')
-        if rate > 5:
-            raise ValidationError("⚠️ لا يمكن أن يكون التقييم أكثر من 5.")
-        if rate <= 0:
-            raise ValidationError("⚠️ لا يمكن أن يكون التقييم 0 او اقل ")
-        return rate   
+            rate = self.cleaned_data.get('rate')
+            if rate > 5:
+                raise ValidationError("⚠️ لا يمكن أن يكون التقييم أكثر من 5.")
+            if rate <= 0:
+                raise ValidationError("⚠️ لا يمكن أن يكون التقييم 0 او اقل ")
+            return rate   
     
     
 
